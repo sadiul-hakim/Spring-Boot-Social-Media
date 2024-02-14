@@ -17,21 +17,32 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(length = 45)
     private String firstName = "";
+
     @Column(length = 45)
     private String lastName = "";
+
     @Column(length = 60)
     private String email = "";
+
     @Column(length = 120)
     private String password = "";
+
+    private String gender="";
+
     @Column(columnDefinition = "JSON")
     @Convert(converter = ListConverter.class)
     private List<Long> followers = new ArrayList<>();
+
     @Column(columnDefinition = "JSON")
     @Convert(converter = ListConverter.class)
     private List<Long> following = new ArrayList<>();
-    private String gender="";
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Post> posts = new ArrayList<>();
+
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp startDate = new Timestamp(System.currentTimeMillis());
 }
