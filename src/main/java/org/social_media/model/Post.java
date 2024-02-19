@@ -21,6 +21,6 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
     @Column(columnDefinition = "JSON")
-    @Convert(converter = ListConverter.class)
+    @Convert(converter = NumberListConverter.class)
     private List<Long> likes;
 }

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ListConverter implements AttributeConverter<List<Long>,String> {
+public class StringListConverter implements AttributeConverter<List<String>,String> {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public String convertToDatabaseColumn(List<Long> attribute) {
+    public String convertToDatabaseColumn(List<String> attribute) {
         try {
             return mapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
@@ -22,7 +22,7 @@ public class ListConverter implements AttributeConverter<List<Long>,String> {
     }
 
     @Override
-    public List<Long> convertToEntityAttribute(String dbData) {
+    public List<String> convertToEntityAttribute(String dbData) {
         try {
             return mapper.readValue(dbData, new TypeReference<>() {
             });
